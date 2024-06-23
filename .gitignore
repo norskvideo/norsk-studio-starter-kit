@@ -1,0 +1,11 @@
+node_modules
+lib
+build
+.direnv
+.envrc
+.DS_Store
+logs
+deploy
+release.tar.gz
+mnt/license/
+mnt/data/whisper-models
