@@ -23,8 +23,8 @@
   "dependencies": {
     "@norskvideo/norsk-sdk": "^1.0.365",
     "@norskvideo/norsk-studio": "^1.0.9",
+    "@norskvideo/norsk-studio-built-ins": "^1.0.8",
     "@norskvideo/norsk-studio-vision-director": "^1.0.1",
-    "@norskvideo/norsk-studio-built-ins": "file:../norsk-studio/workspaces/built-ins",
     "norsk-studio-starter-kit": "file:."
   },
   "devDependencies": {
