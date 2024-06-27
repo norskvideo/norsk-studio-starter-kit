@@ -1,0 +1,5 @@
+services:
+  norsk-studio:
+    network_mode: host
+  norsk-media:
+    network_mode: host

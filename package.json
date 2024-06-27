@@ -30,7 +30,7 @@
     "norsk-studio-starter-kit": "file:."
   },
   "devDependencies": {
-    "@norskvideo/webrtc-static": "^0.1.2",
+    "@norskvideo/webrtc-client": "^0.1.2",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.13.1",

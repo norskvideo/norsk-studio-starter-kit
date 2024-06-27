@@ -1,0 +1,30 @@
+networks:
+  norskNetwork:
+    name: norsk-nw
+
+services:
+  norsk-studio:
+    networks:
+      - norskNetwork
+    ports:
+      - ${STUDIO_PORT:-8000}:8000
+      # Any external ports needed by Studio components.
+      - 5000:5000 # E.g. dynamic bug update port
+    environment:
+      # In Docker networking the name of the norsk server is norsk - not 127.0.0.1
+      STUDIO_NORSK_HOST: norsk-media
+
+  norsk-media:
+    networks:
+      - norskNetwork
+    ports:
+      # "rtmp"
+      - 1935:1935/TCP
+      # "srt-1"
+      - 5001:5001/UDP
+      # "srt-2"
+      - 5002:5002/UDP
+      # "norsk-media-ui"
+      - 6791:6791/TCP
+      # "media-serving"
+      - 8080:8080/TCP

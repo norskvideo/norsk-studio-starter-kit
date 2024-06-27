@@ -1,3 +1,8 @@
+########################################################################
+# This is the main docker-compose file for Norsk Studio and Norsk Media
+# It describes everything other than network type (host or docker)
+# and the ports to be shared in docker networking
+########################################################################
 version : “3”
 
 services:
@@ -7,15 +12,14 @@ services:
     image: norsk-studio-starter-kit:latest
     # restart: always
     depends_on:
-      norsk:
+      norsk-media:
         condition: service_healthy
     volumes:
       - ../mnt:/mnt
     command: npx studio-editor # ${INITIAL_STUDIO_DOCUMENT}
     env_file:
-      - envs/studio-env # Environment variables used by Norsk Studio
-      - envs/components-env # Environment variables used by Norsk Studio's components
-    network_mode: host
+      - ../envs/studio-env # Environment variables used by Norsk Studio
+      - ../envs/components-env # Environment variables used by Norsk Studio's components
     healthcheck:
       test: ["CMD", "wget", "-O", "/dev/null", "http://127.0.0.1:8000"]
       interval: 10s
@@ -24,10 +28,8 @@ services:
       start_period: 40s
       start_interval: 5s
 
-    # The below are nothing to do with Norsk Studio itself, but
-
     ###############################################################
-    # The below are nothing to do with Norsk itself, but
+    # The below are nothing to do with Norsk Studio itself, but
     # are fields we often set in production settings...
     ###############################################################
 
@@ -46,15 +48,14 @@ services:
   #################################################################
   # Norsk Media Server
   #################################################################
-  norsk:
-    container_name: norsk-server
+  norsk-media:
+    container_name: norsk-media
     image: norskvideo/norsk:v1.0.365-main
     command: --license-file /run/secrets/license.json
     # CEF (needs a large amount of shared memory)
     shm_size: '2gb'
     # privileged: true
     restart: always
-    network_mode: host
     volumes:
       - ../mnt:/mnt
       - /dev/shm:/dev/shm/

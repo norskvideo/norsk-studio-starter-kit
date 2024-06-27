@@ -2,14 +2,14 @@ __layout:
   - id: srtlistener-0
     x: 496
     y: 464
-  - id: fixedladder-0
-    x: 1200
-    y: 176
   - id: udpts-1
     x: 1552
     y: 464
   - id: dynamicbug-0
     x: 864
+    y: 176
+  - id: fixedladder
+    x: 1184
     y: 176
 __globalConfig: {}
 nodes:
@@ -25,18 +25,6 @@ nodes:
         - camera1
       id: srtlistener-0
     subscriptions: []
-  - type: processor.transform.fixedLadder
-    config:
-      displayName: fixedLadder
-      rungs:
-        - h264_1280x720
-      id: fixedladder-0
-    subscriptions:
-      - source: dynamicbug-0
-        streams:
-          type: take-first-stream
-          select:
-            - video
   - type: output.udpTs
     config:
       displayName: udpTs
@@ -46,13 +34,6 @@ nodes:
       interface: any
       id: udpts-1
     subscriptions:
-      - source: fixedladder-0
-        streams:
-          type: take-specific-streams
-          select:
-            - video
-          filter:
-            - h264_1280x720
       - source: srtlistener-0
         streams:
           type: take-specific-streams
@@ -60,6 +41,13 @@ nodes:
             - audio
           filter:
             - camera1
+      - source: fixedladder
+        streams:
+          type: take-specific-streams
+          select:
+            - video
+          filter:
+            - h264_1280x720
   - type: processor.dynamicBug
     config:
       displayName: dynamicBug
@@ -74,3 +62,78 @@ nodes:
           select:
             - video
           filter: camera1
+  - type: processor.transform.fixedLadder
+    config:
+      displayName: fixedLadder
+      rungs:
+        - name: h264_1280x720
+          software:
+            width: 1280
+            height: 720
+            codec:
+              type: x264
+              bitrateMode:
+                value: 2500
+                mode: abr
+              keyFrameIntervalMax: 50
+              keyFrameIntervalMin: 50
+              sceneCut: 0
+              preset: fast
+              tune: zerolatency
+              threads: 4
+              bframes: 0
+            frameRate:
+              frames: 25
+              seconds: 1
+          quadra:
+            width: 1280
+            height: 720
+            codec:
+              type: quadra-h264
+              intraPeriod: 50
+              bitrate: 2500000
+            frameRate:
+              frames: 25
+              seconds: 1
+          logan:
+            width: 1280
+            height: 720
+            codec:
+              type: logan-h264
+              intraPeriod: 50
+              bitrate: 2500000
+            frameRate:
+              frames: 25
+              seconds: 1
+          nvidia:
+            width: 1280
+            height: 720
+            codec:
+              type: nv-h264
+              idrPeriod: 50
+              rateControl:
+                mode: vbr
+                averageBitrate: 2500000
+            frameRate:
+              frames: 25
+              seconds: 1
+          ma35d:
+            width: 1280
+            height: 720
+            codec:
+              type: amdMA35D-h264
+              profile: main
+              rateControl:
+                mode: cbr
+                bitrate: 5000
+              gopSize: 50
+            frameRate:
+              frames: 25
+              seconds: 1
+      id: fixedladder
+    subscriptions:
+      - source: dynamicbug-0
+        streams:
+          type: take-first-stream
+          select:
+            - video
