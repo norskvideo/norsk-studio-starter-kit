@@ -12,7 +12,7 @@ __layout:
     x: 1184
     y: 176
 __globalConfig: {}
-nodes:
+components:
   - type: input.srt-listener
     config:
       displayName: srt-listener
