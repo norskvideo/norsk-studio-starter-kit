@@ -2,7 +2,7 @@ import { autoRegisterComponents } from "@norskvideo/norsk-studio/lib/extension/r
 import path from 'path';
 
 export const registerAll = autoRegisterComponents(__dirname,
-  path.join(__dirname, "../client/info.js"),
-  (p: string) => p.replace('lib', 'client'));
+  path.join(__dirname, "../static/info.js"),
+  (p: string) => p.replace('lib', 'static'));
 
 export default registerAll;

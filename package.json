@@ -4,18 +4,20 @@
   "description": "",
   "scripts": {
     "clean": "rm -rf lib",
-    "build": "npx studio-wrap-infos src/ && npx npm-run-all build:*",
+    "build": "npx studio-wrap-infos src/ && npx npm-run-all build:* && rm -rf build",
     "_build:eslint": "npx eslint src",
     "build:server": "npx tsc",
-    "build:client": "npx tsc -p tsconfig-client.json && npx studio-bundle build/info.js client/info.js",
-    "build:css": "rsync --mkpath -v -r --include '*/' --include '*.css' --exclude '*' src/ client/",
+    "build:static": "npx tsc -p tsconfig-static.json && npx studio-bundle build/info.js static/info.js",
+    "build:css": "rsync --mkpath -v -r --include '*/' --include '*.css' --exclude '*' src/ static/",
     "server": "npx studio-editor",
     "test": "echo nothing to see here yet",
     "release": "./release.sh"
   },
   "files": [
-    "client/*",
-    "lib/*"
+    "static/*",
+    "lib/*",
+    "config/*",
+    "mnt/*"
   ],
   "main": "lib/index.js",
   "author": "",
@@ -28,7 +30,7 @@
     "norsk-studio-starter-kit": "file:."
   },
   "devDependencies": {
-    "@norskvideo/webrtc-client": "^0.1.2",
+    "@norskvideo/webrtc-static": "^0.1.2",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.13.1",

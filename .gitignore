@@ -9,3 +9,4 @@ deploy
 release.tar.gz
 mnt/data/whisper-models
 secrets
+static
