@@ -23,5 +23,5 @@
 # UPPERCASE)
 
 # For example, to change the port that the Dynamic Bug
-# component with ID dynamicBug-0 listens on you would set:
-# DYNAMICBUG_0_APIPORT=6000
+# component with ID dynamicBug listens on you would set:
+# DYNAMICBUG_APIPORT=6000

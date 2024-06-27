@@ -1,67 +1,18 @@
 __layout:
-  - id: srtlistener-0
-    x: 496
-    y: 464
-  - id: udpts-1
-    x: 1552
-    y: 464
-  - id: dynamicbug-0
-    x: 864
-    y: 176
   - id: fixedladder
     x: 1184
     y: 176
+  - id: srt-listener
+    x: 496
+    y: 464
+  - id: dynamicbug
+    x: 864
+    y: 176
+  - id: udpts
+    x: 1552
+    y: 464
 __globalConfig: {}
 components:
-  - type: input.srt-listener
-    config:
-      displayName: srt-listener
-      port: 5001
-      ip: 0.0.0.0
-      passphrase: ""
-      socketOptions: {}
-      sourceNames: permissive
-      streamIds:
-        - camera1
-      id: srtlistener-0
-    subscriptions: []
-  - type: output.udpTs
-    config:
-      displayName: udpTs
-      port: 8001
-      destinationIp: 192.168.1.35
-      bufferDelayMs: 500
-      interface: any
-      id: udpts-1
-    subscriptions:
-      - source: srtlistener-0
-        streams:
-          type: take-specific-streams
-          select:
-            - audio
-          filter:
-            - camera1
-      - source: fixedladder
-        streams:
-          type: take-specific-streams
-          select:
-            - video
-          filter:
-            - h264_1280x720
-  - type: processor.dynamicBug
-    config:
-      displayName: dynamicBug
-      defaultBug: trinorsk.png
-      defaultPosition: topleft
-      apiPort: 5000
-      id: dynamicbug-0
-    subscriptions:
-      - source: srtlistener-0
-        streams:
-          type: take-specific-stream
-          select:
-            - video
-          filter: camera1
   - type: processor.transform.fixedLadder
     config:
       displayName: fixedLadder
@@ -132,8 +83,57 @@ components:
               seconds: 1
       id: fixedladder
     subscriptions:
-      - source: dynamicbug-0
+      - source: dynamicbug
         streams:
           type: take-first-stream
           select:
             - video
+  - type: input.srt-listener
+    config:
+      displayName: srt-listener
+      port: 5001
+      ip: 0.0.0.0
+      passphrase: ""
+      socketOptions: {}
+      sourceNames: permissive
+      streamIds:
+        - camera1
+      id: srt-listener
+    subscriptions: []
+  - type: processor.dynamicBug
+    config:
+      displayName: dynamicBug
+      defaultBug: trinorsk.png
+      defaultPosition: topleft
+      apiPort: 5000
+      id: dynamicbug
+    subscriptions:
+      - source: srt-listener
+        streams:
+          type: take-specific-stream
+          select:
+            - video
+          filter: camera1
+  - type: output.udpTs
+    config:
+      displayName: udpTs
+      port: 8001
+      destinationIp: 192.168.1.35
+      bufferDelayMs: 500
+      interface: any
+      id: udpts
+    subscriptions:
+      - source: srt-listener
+        streams:
+          type: take-specific-streams
+          select:
+            - audio
+          filter:
+            - camera1
+      - source: fixedladder
+        streams:
+          type: take-specific-streams
+          select:
+            - video
+          filter:
+            - h264_1280x720

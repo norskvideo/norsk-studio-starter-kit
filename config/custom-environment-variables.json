@@ -1,8 +1,10 @@
 {
-    "server": {
-        "working_directory": "STUDIO_WORKING_DIRECTORY"
-    },
-    "norsk": {
-        "host": "STUDIO_NORSK_HOST"
-    }
+  "server": {
+    "working_directory": "STUDIO_WORKING_DIRECTORY",
+    "document": "STUDIO_DOCUMENT",
+    "document_overrides": "STUDIO_DOCUMENT_OVERRIDES"
+  },
+  "norsk": {
+    "host": "STUDIO_NORSK_HOST"
+  }
 }
