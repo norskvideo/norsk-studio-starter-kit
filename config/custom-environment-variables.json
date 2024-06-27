@@ -1,0 +1,8 @@
+{
+    "server": {
+        "working_directory": "STUDIO_WORKING_DIRECTORY"
+    },
+    "norsk": {
+        "host": "STUDIO_NORSK_HOST"
+    }
+}

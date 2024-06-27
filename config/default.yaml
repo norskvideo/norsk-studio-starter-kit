@@ -1,0 +1,20 @@
+#################################################################
+# Setting for how Norsk Studio itself operates
+#################################################################
+server:
+  port: 8000
+  working_directory: 'mnt/data/studio-save-files'
+  logs: 'logs'
+  library:
+    - '@norskvideo/norsk-studio-built-ins'
+    - '@norskvideo/norsk-studio-vision-director'
+    - 'norsk-studio-starter-kit'
+  developer_mode: true
+
+#################################################################
+# Setting for how Norsk Studio talks to Norsk Media Server
+#################################################################
+norsk:
+  host: '127.0.0.1'
+  api_port: 6790
+  support_port: 6791
