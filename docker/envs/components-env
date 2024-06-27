@@ -1,0 +1,27 @@
+###############################################################
+# Environment variables used components running in your workflows.
+###############################################################
+
+###############################################################
+# Top level
+###############################################################
+# Environment variables that impact ALL instances of a component.
+# in a workflow
+
+# For example you can control the directory from which the
+# Dynamic Bug component reads images files with:
+# NORSK_DATA_BUGS_DIR: /mnt/data/bugs
+
+###############################################################
+# Component instance level
+###############################################################
+# Environment variables that impact ONE instance of a component
+# in a workflow.
+# In general, these overrides have the form
+# ${COMPONENT_ID}_${OVERRIDE_NAME}=VALUE
+# (any - characters are replaced with _ and the env var name is always
+# UPPERCASE)
+
+# For example, to change the port that the Dynamic Bug
+# component with ID dynamicBug-0 listens on you would set:
+# DYNAMICBUG_0_APIPORT=6000

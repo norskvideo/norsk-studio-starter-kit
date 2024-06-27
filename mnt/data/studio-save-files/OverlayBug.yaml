@@ -30,32 +30,6 @@ nodes:
       displayName: fixedLadder
       rungs:
         - h264_1280x720
-      customRungs:
-        x264:
-          - name: h264_1280x720
-            width: 640
-            height: 360
-            frameRate:
-              frames: 25
-              seconds: 1
-            codec:
-              type: x264
-              bitrateMode:
-                mode: abr
-                value: 1000
-              keyFrameIntervalMax: 50
-              keyFrameIntervalMin: 50
-              threads: 1
-              bframes: 0
-              frameReference: 0
-              sceneCut: 0
-              preset: fast
-              tune: zerolatency
-        _x264: [{          name: 'h264_1280x720',width: 640,          height: 360, frameRate: {frames: 25, seconds: 1}, codec: {type: 'x264', bitrateMode: {mode: 'abr', value: 1000}, keyFrameIntervalMax: 50, keyFrameIntervalMin: 50, threads: 1, bframes: 0, frameReference: 0, sceneCut: 0, preset: "fast", tune: 'zerolatency'}}]
-
-
-
-               # {name: 'preview'}, width: 640, height: 360
       id: fixedladder-0
     subscriptions:
       - source: dynamicbug-0

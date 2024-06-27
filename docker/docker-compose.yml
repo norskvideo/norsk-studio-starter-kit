@@ -1,0 +1,94 @@
+version : “3”
+
+services:
+  norsk-studio:
+    container_name: norsk-studio
+    # image: norskvideo/norsk-studio-starter-kit:0.0.2
+    image: norsk-studio-starter-kit:latest
+    # restart: always
+    depends_on:
+      norsk:
+        condition: service_healthy
+    volumes:
+      - ../mnt:/mnt
+    command: npx studio-editor # ${INITIAL_STUDIO_DOCUMENT}
+    env_file:
+      - envs/studio-env # Environment variables used by Norsk Studio
+      - envs/components-env # Environment variables used by Norsk Studio's components
+    network_mode: host
+    healthcheck:
+      test: ["CMD", "wget", "-O", "/dev/null", "http://127.0.0.1:8000"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+      start_interval: 5s
+
+    # The below are nothing to do with Norsk Studio itself, but
+
+    ###############################################################
+    # The below are nothing to do with Norsk itself, but
+    # are fields we often set in production settings...
+    ###############################################################
+
+    # Manage ownership of mounted volumes
+    # user: ${USER_ID}:${GROUP_ID}
+
+    # Manage which cores this container runs on
+    # Useful for segregating Norsk instances on large servers...
+    # cpuset: ${CPU_SET:-0-31}
+
+    # are fields we often set in production settings...
+
+    # Useful for segregating Norsk instances on large servers...
+    # cpuset: ${STUDIO_CPU_SET:-0-1}
+
+  #################################################################
+  # Norsk Media Server
+  #################################################################
+  norsk:
+    container_name: norsk-server
+    image: norskvideo/norsk:v1.0.365-main
+    command: --license-file /run/secrets/license.json
+    # CEF (needs a large amount of shared memory)
+    shm_size: '2gb'
+    # privileged: true
+    restart: always
+    network_mode: host
+    volumes:
+      - ../mnt:/mnt
+      - /dev/shm:/dev/shm/
+    healthcheck:
+      test: ["CMD", "wget", "-O", "/dev/null", "http://127.0.0.1:6791"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+      start_interval: 5s
+    secrets:
+      - license.json
+
+    ###############################################################
+    # Provide access to any devices Norsk Media might need to access
+    ###############################################################
+    # devices:
+    #   - /dev/nvme0n1 # NETINT Quadra
+    #   - /dev/nvme1n1 # More Quadra
+    #   - /dev/flex-x4100 # Deltacast SDI
+    #   - /dev/ama_transcoder1 # AMD MA35D
+
+    ###############################################################
+    # The below are nothing to do with Norsk itself, but
+    # are fields we often set in production settings...
+    ###############################################################
+
+    # Manage ownership of mounted volumes
+    # user: ${USER_ID}:${GROUP_ID}
+
+    # Manage which cores this container runs on
+    # Useful for segregating Norsk instances on large servers...
+    # cpuset: ${CPU_SET:-0-31}
+
+secrets:
+  license.json:
+    file: ../secrets/license.json

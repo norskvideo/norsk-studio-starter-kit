@@ -1,0 +1,14 @@
+# In a containerised environment we need to tell Studio where to find save files
+STUDIO_WORKING_DIRECTORY=${STUDIO_WORKING_DIRECTORY:-/mnt/data/studio-save-files/}
+
+# If non-empty, Studio will load from it's working directory and run the
+# document at startup.  It also disables stop / start on the workflow
+INITIAL_STUDIO_DOCUMENT=
+
+# Media URLs that Studio publishes will start with the below
+PUBLIC_URL_PREFIX=${PUBLIC_URL_PREFIX:-http://127.0.0.1:8080}
+
+# Logging
+LOG_LEVEL: silly # error warning info debug silly
+NODE_DEBUG: norsk # Output extra trace (e.g. gRPC messages)
+
