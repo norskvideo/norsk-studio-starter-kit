@@ -3,7 +3,7 @@
 #################################################################
 server:
   port: 8000
-  working_directory: 'mnt/data/studio-save-files'
+  working_directory: 'mnt/data/'
   logs: 'logs'
   library:
     - '@norskvideo/norsk-studio-built-ins'

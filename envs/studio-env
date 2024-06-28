@@ -1,9 +1,17 @@
-# In a containerised environment we need to tell Studio where to find save files
-STUDIO_WORKING_DIRECTORY=${STUDIO_WORKING_DIRECTORY:-/mnt/data/studio-save-files/}
+# This is the directory in which all files are accessed by Studio
+# relative to this, studio-save-files are where the yaml files exist
+# but components may read/write to sub directories of this folder
+# and it is assumed that the same directory is also mounted under the same path
+# for Norsk as well, so that the same files are available (such as images, data sources, etc)
+STUDIO_WORKING_DIRECTORY=${STUDIO_WORKING_DIRECTORY:mnt/data/}
 
-# If non-empty, Studio will load from it's working directory and run the
+# If non-empty, Studio will load from its working directory and run the
 # document at startup.  It also disables stop / start on the workflow
-INITIAL_STUDIO_DOCUMENT=
+STUDIO_DOCUMENT=
+
+# If non-empty, Studio will use this file to override configuration using
+# in the same manner as the usage of environment variables
+STUDIO_DOCUMENT_OVERRIDES=
 
 # Media URLs that Studio publishes will start with the below
 PUBLIC_URL_PREFIX=${PUBLIC_URL_PREFIX:-http://127.0.0.1:8080}

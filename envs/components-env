@@ -8,9 +8,9 @@
 # Environment variables that impact ALL instances of a component.
 # in a workflow
 
-# For example you can control the directory from which the
-# Dynamic Bug component reads images files with:
-# NORSK_DATA_BUGS_DIR: /mnt/data/bugs
+# If not specified, this will be 'bugs', relative to the 
+# norsk working directory
+DYNAMICBUG_DIRECTORY=bugs
 
 ###############################################################
 # Component instance level
