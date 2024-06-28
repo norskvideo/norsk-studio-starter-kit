@@ -22,6 +22,6 @@ DYNAMICBUG_DIRECTORY=bugs
 # (any - characters are replaced with _ and the env var name is always
 # UPPERCASE)
 
-# For example, to change the port that the Dynamic Bug
-# component with ID dynamicBug listens on you would set:
-# DYNAMICBUG_APIPORT=6000
+# For example, to change the port that an SRT listener with id
+# srt-input is listening on 
+# SRT_INPUT_PORT=5000
