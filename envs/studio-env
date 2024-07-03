@@ -3,7 +3,7 @@
 # but components may read/write to sub directories of this folder
 # and it is assumed that the same directory is also mounted under the same path
 # for Norsk as well, so that the same files are available (such as images, data sources, etc)
-STUDIO_WORKING_DIRECTORY=${STUDIO_WORKING_DIRECTORY:-mnt/data/}
+STUDIO_WORKING_DIRECTORY=${STUDIO_WORKING_DIRECTORY:-/mnt/data/}
 
 # If non-empty, Studio will load from its working directory and run the
 # document at startup.  It also disables stop / start on the workflow
