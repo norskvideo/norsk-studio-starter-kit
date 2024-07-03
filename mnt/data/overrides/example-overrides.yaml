@@ -1,6 +1,11 @@
-###############################################################
-# Environment variables used components running in your workflows.
-###############################################################
+########################################################################################
+# Top level Studio overrides
+########################################################################################
+# GLOBAL_ICE_SERVERS:
+#   - url: turn:turn:3478
+#     reportedUrl: turn:MyPublicIp:3478
+#     username: norsk
+#     credential: norsk
 
 ###############################################################
 # Top level
@@ -10,7 +15,7 @@
 
 # If not specified, this will be 'bugs', relative to the
 # norsk working directory
-# DYNAMICBUG_DIRECTORY=bugs
+# DYNAMICBUG_DIRECTORY: bugs
 
 ###############################################################
 # Component instance level
@@ -24,4 +29,4 @@
 
 # For example, to change the port that an SRT listener with id
 # srt-input is listening on
-# SRT_INPUT_PORT=5000
+# SRT_INPUT_PORT: 5000

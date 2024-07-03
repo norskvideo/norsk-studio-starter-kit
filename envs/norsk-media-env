@@ -6,10 +6,10 @@
 ###############################################################
 # NETINT Device access
 ###############################################################
-# DEFAULT_QUADRA_DEVICE_INDEX: ${DEFAULT_QUADRA_DEVICE_INDEX:-0}
-# DEFAULT_LOGAN_DEVICE_INDEX: ${DEFAULT_LOGAN_DEVICE_INDEX:-0}
+# DEFAULT_QUADRA_DEVICE_INDEX=${DEFAULT_QUADRA_DEVICE_INDEX:-0}
+# DEFAULT_LOGAN_DEVICE_INDEX=${DEFAULT_LOGAN_DEVICE_INDEX:-0}
 
 ###############################################################
 # Runtime (erlang / BEAM) tuning
 ###############################################################
-# ERL_ZFLAGS: "+SDio 32 +S 32:32"
+# ERL_ZFLAGS="+SDio 32 +S 32:32"

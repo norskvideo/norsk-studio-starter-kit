@@ -1,18 +1,44 @@
 __layout:
+  - id: srt-listener
+    x: 480
+    y: 400
+  - id: dynamicbug
+    x: 848
+    y: 144
   - id: fixedladder
     x: 1184
-    y: 176
-  - id: srt-listener
-    x: 496
-    y: 464
-  - id: dynamicbug
-    x: 864
-    y: 176
-  - id: udpts
-    x: 1552
-    y: 464
+    y: 144
+  - id: whep
+    x: 1520
+    y: 400
 __globalConfig: {}
 components:
+  - type: input.srt-listener
+    config:
+      displayName: srt-listener
+      port: 5001
+      ip: 0.0.0.0
+      passphrase: ""
+      socketOptions: {}
+      sourceNames: permissive
+      streamIds:
+        - camera1
+      id: srt-listener
+    subscriptions: []
+  - type: processor.dynamicBug
+    config:
+      displayName: dynamicBug
+      defaultBug: trinorsk.png
+      defaultPosition: topleft
+      apiPort: 5000
+      id: dynamicbug
+    subscriptions:
+      - source: srt-listener
+        streams:
+          type: take-specific-stream
+          select:
+            - video
+          filter: camera1
   - type: processor.transform.fixedLadder
     config:
       displayName: fixedLadder
@@ -88,52 +114,21 @@ components:
           type: take-first-stream
           select:
             - video
-  - type: input.srt-listener
+  - type: output.whep
     config:
-      displayName: srt-listener
-      port: 5001
-      ip: 0.0.0.0
-      passphrase: ""
-      socketOptions: {}
-      sourceNames: permissive
-      streamIds:
-        - camera1
-      id: srt-listener
-    subscriptions: []
-  - type: processor.dynamicBug
-    config:
-      displayName: dynamicBug
-      defaultBug: trinorsk.png
-      defaultPosition: topleft
-      apiPort: 5000
-      id: dynamicbug
+      displayName: whep
+      bufferDelayMs: 500
+      id: whep
     subscriptions:
-      - source: srt-listener
+      - source: fixedladder
         streams:
           type: take-specific-stream
           select:
             - video
-          filter: camera1
-  - type: output.udpTs
-    config:
-      displayName: udpTs
-      port: 8001
-      destinationIp: 192.168.1.35
-      bufferDelayMs: 500
-      interface: any
-      id: udpts
-    subscriptions:
+          filter: h264_1280x720
       - source: srt-listener
         streams:
-          type: take-specific-streams
+          type: take-specific-stream
           select:
             - audio
-          filter:
-            - camera1
-      - source: fixedladder
-        streams:
-          type: take-specific-streams
-          select:
-            - video
-          filter:
-            - h264_1280x720
+          filter: camera1

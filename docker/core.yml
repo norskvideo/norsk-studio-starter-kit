@@ -16,7 +16,7 @@ services:
         condition: service_healthy
     volumes:
       - ../mnt:/mnt
-    command: npx studio-editor # ${INITIAL_STUDIO_DOCUMENT}
+    command: npx studio-editor
     env_file:
       - ../envs/studio-env # Environment variables used by Norsk Studio
       - ../envs/components-env # Environment variables used by Norsk Studio's components
@@ -77,6 +77,13 @@ services:
     #   - /dev/nvme1n1 # More Quadra
     #   - /dev/flex-x4100 # Deltacast SDI
     #   - /dev/ama_transcoder1 # AMD MA35D
+    ###############################################################
+    # Same for NVIDIA
+    # runtime: nvidia
+    ###############################################################
+    # environment:
+    #   - NVIDIA_VISIBLE_DEVICES=all
+    #   - NVIDIA_DRIVER_CAPABILITIES=all
 
     ###############################################################
     # The below are nothing to do with Norsk itself, but
