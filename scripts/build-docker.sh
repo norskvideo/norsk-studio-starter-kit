@@ -13,7 +13,10 @@ backupfilename=docker-prepack.tgz
 function main ()
 {
   # Working directory, must be in the context (.) of the docker build
-  copydir=$(readlink -f $(mktemp -d -p .))
+  localPackageDirName=prepack-local-packages
+  rm -Rf ${localPackageDirName}
+  mkdir -p ${localPackageDirName}
+  localPackageDir=$(readlink -f ${localPackageDirName})
 
   # Look at the dependencies in the package json, pull out file: dependencies, ignoring the current module (file:.)
   mapfile -t packages < <(jq -r '.dependencies | to_entries | .[] | select  (.value !=  "file:." ) | select (.value | startswith("file:"))  |  .value  ' package.json | sed 's|^file:||')
@@ -28,21 +31,21 @@ function main ()
     for package in ${packages[@]}; do
       echo Packing $package
       pushd $package > /dev/null
-      npm pack --pack-destination $copydir
+      npm pack --pack-destination $localPackageDir
 
       popd > /dev/null
     done
 
-    for module in $(ls $copydir); do
+    for module in $(ls $localPackageDir); do
       echo Installing $module
-      npm install --save $copydir/$module
+      npm install --save $localPackageDir/$module
     done
   fi
 
   docker build -t norsk-studio-starter-kit .
 
   if [[ -f ${backupfilename} ]]; then
-    rm -Rf $copydir
+    rm -Rf $localPackageDir
     rm -Rf node_modules
 
     echo Restoring backup of current env
