@@ -15,6 +15,10 @@ spec:
         app.kubernetes.io/name: norsk-studio
     spec:
       volumes:
+        - name: norsk-secrets
+          secret:
+            secretName: norsk-secrets
+
         - name: norsk-pv-storage
           persistentVolumeClaim:
             claimName: norsk-pv-claim
@@ -27,7 +31,7 @@ spec:
           image: norskvideo/norsk:v1.0.365-main
           args:
             - --license-file
-            - /mnt/license/license.json
+            - /run/secrets/license.json
           ports:
             - name: "rtmp"
               containerPort: 1935
@@ -50,12 +54,17 @@ spec:
               hostPort: 8080
               protocol: TCP
           volumeMounts:
-            - mountPath: "/mnt"
-              name: norsk-pv-storage
+            - name: norsk-secrets
+              mountPath: /run/secrets
+
+            - name: norsk-pv-storage
+              mountPath: "/mnt"
+
             # CEF (needs a large amount of shared memory)
             # This is the equivalent of Docker's: shm_size: '2gb'
-            - mountPath: /dev/shm
-              name: dshm
+            - name: dshm
+              mountPath: /dev/shm
+
 
         # - name: norsk-studio
         #   image: norskvideo/norsk-studio-starter-kit:0.0.1

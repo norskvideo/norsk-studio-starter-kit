@@ -12,4 +12,4 @@ usage() {
 cd "${0%/*}"
 source script-helpers/_kubectl-command.sh
 
-$KUBECTL logs -f deployments/norsk-studio -c norsk-media
+$KUBECTL -n norsk-dev logs -f deployments/norsk-studio -c norsk-media
