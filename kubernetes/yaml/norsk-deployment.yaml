@@ -1,0 +1,104 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: norsk-studio
+  labels:
+    app.kubernetes.io/name: norsk-studio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: norsk-studio
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: norsk-studio
+    spec:
+      volumes:
+        - name: norsk-pv-storage
+          persistentVolumeClaim:
+            claimName: norsk-pv-claim
+        - name: dshm
+          emptyDir:
+            medium: Memory
+            sizeLimit: 2G
+      containers:
+        - name: norsk-media
+          image: norskvideo/norsk:v1.0.365-main
+          args:
+            - --license-file
+            - /mnt/license/license.json
+          ports:
+            - name: "rtmp"
+              containerPort: 1935
+              hostPort: 1935
+              protocol: TCP
+            - name: "srt-1"
+              containerPort: 5001
+              hostPort: 5001
+              protocol: UDP
+            - name: "srt-2"
+              containerPort: 5002
+              hostPort: 5002
+              protocol: UDP
+            - name: "norsk-media-ui"
+              containerPort: 6791
+              hostPort: 6791
+              protocol: TCP
+            - name: "media-serving"
+              containerPort: 8080
+              hostPort: 8080
+              protocol: TCP
+          volumeMounts:
+            - mountPath: "/mnt"
+              name: norsk-pv-storage
+            # CEF (needs a large amount of shared memory)
+            # This is the equivalent of Docker's: shm_size: '2gb'
+            - mountPath: /dev/shm
+              name: dshm
+
+        # - name: norsk-studio
+        #   image: norskvideo/norsk-studio-starter-kit:0.0.1
+        #   args:
+        #     - npx
+        #     - studio-editor
+        #     - ${INITIAL_STUDIO_DOCUMENT}
+        #     # - node
+        #     # - -e
+        #     # - require("./lib/src/12_overlay_score").main()
+        #   env:
+        #     - name: NODE_ENV
+        #       value: kubernetes
+        #     - name: NODE_DEBUG
+        #       value: norsk
+        #     - name: NORSK_DATA_BUGS_DIR
+        #       value: /mnt/data/bugs
+        #     - name: CLIENT_HOST_EXTERNAL
+        #       value: ${HOST_EXTERNAL}
+        #     - name: CLIENT_HOST_INTERNAL
+        #       value: 127.0.0.1
+        #     - name: DEBUG_URL_PREFIX
+        #       value: http://${HOST_EXTERNAL}:6791
+        #     - name: NORSK_HOST
+        #       value: 127.0.0.1
+        #     - name: PUBLIC_URL_PREFIX
+        #       value: http://${HOST_EXTERNAL}:8080
+        #     - name: TURN_EXTERNAL
+        #       value: 127.0.0.1
+        #     - name: TURN_INTERNAL
+        #       value: turn
+        #     - name: TURN_MODE
+        #       value: local
+        #   ports:
+        #     - name: "studio-ui"
+        #       containerPort: 8000
+        #       protocol: TCP
+        #       hostPort: 8000
+        #     # Any external ports needed by Studio components.  E.g for now at least
+        #     - name: "bug-update"
+        #       containerPort: 5000
+        #       protocol: TCP
+        #       hostPort: 5000
+        #   volumeMounts:
+        #     - mountPath: "/mnt"
+        #       name: norsk-pv-storage
