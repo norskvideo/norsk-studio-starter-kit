@@ -66,48 +66,48 @@ spec:
               mountPath: /dev/shm
 
 
-        # - name: norsk-studio
-        #   image: norskvideo/norsk-studio-starter-kit:0.0.1
-        #   args:
-        #     - npx
-        #     - studio-editor
-        #     - ${INITIAL_STUDIO_DOCUMENT}
-        #     # - node
-        #     # - -e
-        #     # - require("./lib/src/12_overlay_score").main()
-        #   env:
-        #     - name: NODE_ENV
-        #       value: kubernetes
-        #     - name: NODE_DEBUG
-        #       value: norsk
-        #     - name: NORSK_DATA_BUGS_DIR
-        #       value: /mnt/data/bugs
-        #     - name: CLIENT_HOST_EXTERNAL
-        #       value: ${HOST_EXTERNAL}
-        #     - name: CLIENT_HOST_INTERNAL
-        #       value: 127.0.0.1
-        #     - name: DEBUG_URL_PREFIX
-        #       value: http://${HOST_EXTERNAL}:6791
-        #     - name: NORSK_HOST
-        #       value: 127.0.0.1
-        #     - name: PUBLIC_URL_PREFIX
-        #       value: http://${HOST_EXTERNAL}:8080
-        #     - name: TURN_EXTERNAL
-        #       value: 127.0.0.1
-        #     - name: TURN_INTERNAL
-        #       value: turn
-        #     - name: TURN_MODE
-        #       value: local
-        #   ports:
-        #     - name: "studio-ui"
-        #       containerPort: 8000
-        #       protocol: TCP
-        #       hostPort: 8000
-        #     # Any external ports needed by Studio components.  E.g for now at least
-        #     - name: "bug-update"
-        #       containerPort: 5000
-        #       protocol: TCP
-        #       hostPort: 5000
-        #   volumeMounts:
-        #     - mountPath: "/mnt"
-        #       name: norsk-pv-storage
+        - name: norsk-studio
+          image: norsk-studio-starter-kit:latest
+          imagePullPolicy: Never
+          args:
+            - npx
+            - studio-editor
+            - ${INITIAL_STUDIO_DOCUMENT}
+          env:
+            - name: NODE_ENV
+              value: kubernetes
+            - name: NODE_DEBUG
+              value: norsk
+            - name: STUDIO_WORKING_DIRECTORY
+              value: /mnt/data
+            - name: STUDIO_DOCUMENT
+              value: /mnt/data/studio-save-files/OverlayBug.yaml
+            - name: CLIENT_HOST_EXTERNAL
+              value: ${HOST_EXTERNAL}
+            - name: CLIENT_HOST_INTERNAL
+              value: 127.0.0.1
+            - name: DEBUG_URL_PREFIX
+              value: http://${HOST_EXTERNAL}:6791
+            - name: NORSK_HOST
+              value: 127.0.0.1
+            - name: PUBLIC_URL_PREFIX
+              value: http://${HOST_EXTERNAL}:8080
+            - name: TURN_EXTERNAL
+              value: 127.0.0.1
+            - name: TURN_INTERNAL
+              value: turn
+            - name: TURN_MODE
+              value: local
+          ports:
+            - name: "studio-ui"
+              containerPort: 8000
+              protocol: TCP
+              hostPort: 8000
+            # Any external ports needed by Studio components.  E.g for now at least
+            - name: "bug-update"
+              containerPort: 5000
+              protocol: TCP
+              hostPort: 5000
+          volumeMounts:
+            - mountPath: "/mnt"
+              name: norsk-pv-storage

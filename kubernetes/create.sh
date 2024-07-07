@@ -17,9 +17,14 @@ if [[ ! -f $1 ]]; then
   usage
 fi
 
-eval $(cat "$1" | sed  's/#.*//;s/^/export /')
+fullPath=$(readlink --canonicalize "$1")
 
 cd "${0%/*}"
+eval $(cat "$fullPath" | sed  's/#.*//;s/^/export /')
+
+# Make MNT_ROOT an absolute path
+export MNT_ROOT=$(readlink --canonicalize "$MNT_ROOT")
+
 source script-helpers/_kubectl-command.sh
 source script-helpers/_envsubst.sh
 

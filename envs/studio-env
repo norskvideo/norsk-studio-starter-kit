@@ -11,7 +11,7 @@ STUDIO_DOCUMENT=${STUDIO_DOCUMENT:-}
 
 # If non-empty, Studio will use this file to override configuration using
 # in the same manner as the usage of environment variables
-STUDIO_DOCUMENT_OVERRIDES=${STUDIO_DOCUMENT_OVERRIDES:-}
+STUDIO_DOCUMENT_OVERRIDES=${STUDIO_DOCUMENT_OVERRIDES:-/mnt/data/overrides/example-overrides.yaml}
 
 # Media URLs that Studio publishes will start with the below
 PUBLIC_URL_PREFIX=${PUBLIC_URL_PREFIX:-http://127.0.0.1:8080}

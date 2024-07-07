@@ -5,7 +5,7 @@
   "scripts": {
     "clean": "rm -rf lib",
     "build": "npx studio-wrap-infos src/ && npx npm-run-all build:* && rm -rf build",
-    "build-docker": "npm run build && ./build-docker.sh",
+    "build-docker": "npm run build && ./scripts/build-docker.sh",
     "_build:eslint": "npx eslint src",
     "build:server": "npx tsc",
     "build:static": "npx tsc -p tsconfig-static.json && npx studio-bundle build/info.js static/info.js",

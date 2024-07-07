@@ -6,7 +6,6 @@ kubectl_error() {
 }
 
 __kubectl_file=env/kubectl-command
-echo $__kubectl_file
 if [[ ! -f $__kubectl_file ]] ; then
   kubectl_error
 fi
