@@ -5,4 +5,4 @@ COPY node_modules ./node_modules/
 COPY lib ./lib
 COPY static ./static
 COPY config ./config/
-COPY prepack-local-packages/* ./prepack-local-packages/
+COPY prepack-local-packages ./prepack-local-packages/
