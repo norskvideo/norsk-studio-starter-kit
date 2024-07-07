@@ -8,7 +8,6 @@ acct=norskvideo
 name=norsk-studio-starter-kit
 
 function main {
-
     local -r arch=$(uname -m)
     local -r label=$(npm view file:. version)
     local tag

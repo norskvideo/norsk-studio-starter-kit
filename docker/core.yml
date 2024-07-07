@@ -8,8 +8,8 @@ version : “3”
 services:
   norsk-studio:
     container_name: norsk-studio
-    # image: norskvideo/norsk-studio-starter-kit:0.0.2
-    image: norsk-studio-starter-kit:latest
+    image: norskvideo/norsk-studio-starter-kit:latest
+    # image: norsk-studio-starter-kit:latest
     # restart: always
     depends_on:
       norsk-media:
