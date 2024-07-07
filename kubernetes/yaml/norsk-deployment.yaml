@@ -67,8 +67,7 @@ spec:
 
 
         - name: norsk-studio
-          image: norsk-studio-starter-kit:latest
-          imagePullPolicy: Never
+          image: localhost:32000/norsk-studio-starter-kit:latest
           args:
             - npx
             - studio-editor
