@@ -3,27 +3,21 @@ set -euo pipefail
 
 usage() {
     echo "Usage:"
-    echo "  ${0##*/} env_file"
+    echo "  ${0##*/}"
     echo "  Starts Norsk Studio and Norsk Media Server inside a Kubernetes cluster"
     exit 1
 }
 
-if [ $# -ne 1 ]; then
+if [ $# -ne 0 ]; then
     usage
 fi
 
-if [[ ! -f $1 ]]; then
-  echo "Env file $1 not found"
-  usage
-fi
-
-fullPath=$(readlink --canonicalize "$1")
 
 cd "${0%/*}"
-eval $(cat "$fullPath" | sed  's/#.*//;s/^/export /')
+eval $(cat ../envs/components-env ../envs/norsk-media-env ../envs/studio-env  | sed  's/#.*//;s/^/export /')
 
-# Make MNT_ROOT an absolute path
-export MNT_ROOT=$(readlink --canonicalize "$MNT_ROOT")
+# The persistent volume mount point needs to be an absolute path
+export MNT_ROOT=$(readlink --canonicalize ../mnt)
 
 source script-helpers/_kubectl-command.sh
 source script-helpers/_envsubst.sh
