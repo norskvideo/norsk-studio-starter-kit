@@ -4,7 +4,7 @@ set -eou pipefail
 cd "${0%/*}"
 cd ..
 
-for package in $(cat package.json | jq -r '.dependencies | to_entries[] | select(.key | startswith("@norskvideo/norsk-studio-")) | .key') ; do
+for package in $(cat package.json | jq -r '.dependencies | to_entries[] | select(.key | startswith("@norskvideo/norsk-studio")) | .key') ; do
     currentSource=$(cat package.json | jq -r  '.dependencies | ."'$package'"')
     case "$currentSource" in
         file:*)
