@@ -5,13 +5,14 @@ cd "${0%/*}"
 cd ..
 
 localPackageRoot=../norsk-studio
+norskPrivate=../norsk-studio-private
 if [[ ! $(compgen -G "$localPackageRoot/workspaces/*/package.json") ]] ; then
     echo "I was expecting to find local packages in $localPackageRoot/workspaces"
     echo "Can't continue"
     exit 1
 fi
 
-for package in $(cat package.json | jq -r '.dependencies | to_entries[] | select(.key | startswith("@norskvideo/norsk-studio-")) | .key') ; do
+for package in $(cat package.json | jq -r '.dependencies | to_entries[] | select(.key | startswith("@norskvideo/norsk-studio")) | .key') ; do
     currentSource=$(cat package.json | jq -r  '.dependencies | ."'$package'"')
     case "$currentSource" in
         file:*)
@@ -19,7 +20,7 @@ for package in $(cat package.json | jq -r '.dependencies | to_entries[] | select
             ;;
         *)
             foundPackage=false
-            for localPackage in $localPackageRoot/workspaces/*/package.json ; do
+            for localPackage in $norskPrivate/package.json $localPackageRoot/workspaces/*/package.json ; do
                 localPackageName=$(cat $localPackage | jq -r .name || "")
                 if [[ "$localPackageName" == "$package" ]] ; then
                     localPackageDir=${localPackage%/package.json}
@@ -36,5 +37,5 @@ for package in $(cat package.json | jq -r '.dependencies | to_entries[] | select
                 echo "Could not find $package in $localPackageDir"
             fi
             ;;
-        esac
+    esac
 done
