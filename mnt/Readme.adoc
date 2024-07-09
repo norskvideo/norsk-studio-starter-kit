@@ -1,0 +1,27 @@
+= Mounted Volume
+
+This folder is mounted as a volume into both the Norsk Studio and Norsk Media containers.  This is a volume in Docker Compose and a persistent volume in Kubernetes.
+
+The Kubernetes example is deliberately simplistic - for example, it is assumed the mnt folder is avaible on whichever server the deployment is assigned to...
+
+Example folder structure below:
+
+----
+mnt
+└── data
+   ├── bugs
+   │  └── trinorsk.png
+   ├── studio-save-files
+   │  ├── OverlayBug.yaml
+   │  ├── VisionDirector.yaml
+   │  └── WhisperSubtitles.yaml
+   └── whisper-models
+----
+
+== Other Files You Might Want to Mount
+
+Basically anything that either Norsk Media or the Norsk Studio components might want to access.  For example, any Whisper langauge models etc.  The Whisper demo
+assumes ggml-tiny.bin is in `mnt/data/whisper-models/`
+
+You can get it from e.g. https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-tiny.bin.
+Or run `scripts/get-whisper-tiny-model.sh`

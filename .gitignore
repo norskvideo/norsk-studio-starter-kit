@@ -9,3 +9,5 @@ deploy
 release.tar.gz
 mnt/data/whisper-models
 static
+.vscode/
+_ignore/
