@@ -1,0 +1,21 @@
+version : “3”
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx-proxy
+    extra_hosts:
+    - "host.docker.internal:host-gateway"
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    secrets:
+      - nginx.ec.crt
+      - nginx.ec.key
+
+secrets:
+  nginx.ec.crt:
+    file: certs/nginx.ec.crt
+  nginx.ec.key:
+    file: certs/nginx.ec.key
