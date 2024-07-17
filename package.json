@@ -1,6 +1,6 @@
 {
   "name": "norsk-studio-starter-kit",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "scripts": {
     "clean": "rm -rf lib",
