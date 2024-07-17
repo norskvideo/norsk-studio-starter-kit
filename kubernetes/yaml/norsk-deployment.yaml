@@ -71,8 +71,8 @@ spec:
         # Norsk Studio
         #################################################################
         - name: norsk-studio
-          # image: norskvideo/norsk-studio-starter-kit:latest
-          image: localhost:32000/norsk-studio-starter-kit:latest
+          image: norskvideo/norsk-studio-starter-kit:latest
+          # image: localhost:32000/norsk-studio-starter-kit:latest
           args:
             - npx
             - studio-editor
