@@ -14,8 +14,8 @@ let
 
   ffmpegForTests = nixpkgs.ffmpeg-full;
 
-  # ffmpegForTests = (nixpkgs.ffmpeg-full.override { 
-  # withGme = false; 
+  # ffmpegForTests = (nixpkgs.ffmpeg-full.override {
+  # withGme = false;
   # withVmaf = true;
 
   # # https://github.com/NixOS/nixpkgs/commit/0f0b89fc7bcea595d006f8323f40bb75c8a230af#diff-553d3a02dcec4459499ae8606548394f86a283651d828b2661b232f0c0aed5caR31
@@ -25,7 +25,7 @@ let
   #       substituteInPlace Makefile --replace '$(if $(STRIP), $(STRIP) -x $@)' '$(if $(STRIP), $(STRIP) -S $@)'
   #     '';
   # });
-  
+
   #  });
 
   chromium = (nixpkgs.chromium); # .override { channel = "dev"; });

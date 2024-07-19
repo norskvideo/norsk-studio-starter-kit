@@ -10,6 +10,15 @@ server:
     - '@norskvideo/norsk-studio-vision-director'
     - 'norsk-studio-starter-kit'
   developer_mode: true
+  # You can configure multiple storage options here, but only s3 exists at present
+  # By default, documents are saved to the local filesystem on the server running studio
+  # If you want to save to S3, you need to configure the bucket and prefix below
+  # The server (or current environment) needs to have the correct AWS credentials to read, write and list object in the bucket
+  # storage_settings:
+  #   - id: "s3"
+  #     name: "s3"
+  #     bucket: "cf-norsk-manager-config"
+  #     prefix: "studio-packages"
 
 #################################################################
 # Setting for how Norsk Studio talks to Norsk Media Server
