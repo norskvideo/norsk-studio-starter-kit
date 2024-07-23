@@ -4,11 +4,11 @@
 # GLOBAL_ICE_SERVERS: # this is the default
 #   - url: stun:stun.l.google.com:19302
 
-# GLOBAL_ICE_SERVERS: # if you are running with a local turn server (replace "MyTurnIp")
-#   - url: turn:turn:3478
-#     reportedUrl: turn:MyTurnIp:3478
-#     username: norsk
-#     credential: norsk
+GLOBAL_ICE_SERVERS: # if you are running with a local turn server (replace "MyTurnIp" in reportedUrl)
+  - url: turn:norsk-turn:3478
+    reportedUrl: turn:arnuc:3478
+    username: norsk
+    credential: norsk
 
 ###############################################################
 # Top level

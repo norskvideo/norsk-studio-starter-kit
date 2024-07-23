@@ -1,10 +1,5 @@
 services:
-  turn:
-    container_name: norsk-turn
-    image: coturn/coturn
-    # user: "${DOCKER_UID}:${DOCKER_GID}"
-    volumes:
-      - ../turn/turnserver.conf:/etc/coturn/turnserver.conf:ro
+  norsk-turn:
     ports:
       - 3478:3478/udp # STUN/TURN
       - 3478:3478/tcp # TURN tcp transport
