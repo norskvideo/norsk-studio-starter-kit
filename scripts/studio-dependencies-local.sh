@@ -5,7 +5,7 @@ cd "${0%/*}"
 cd ..
 
 localPackageRoot=../norsk-studio
-norskPrivate=../norsk-studio-private
+norskCore=../norsk-studio-core
 if [[ ! $(compgen -G "$localPackageRoot/workspaces/*/package.json") ]] ; then
     echo "I was expecting to find local packages in $localPackageRoot/workspaces"
     echo "Can't continue"
@@ -20,7 +20,7 @@ for package in $(cat package.json | jq -r '.dependencies | to_entries[] | select
             ;;
         *)
             foundPackage=false
-            for localPackage in $norskPrivate/package.json $localPackageRoot/workspaces/*/package.json ; do
+            for localPackage in $norskCore/package.json $localPackageRoot/workspaces/*/package.json ; do
                 localPackageName=$(cat $localPackage | jq -r .name || "")
                 if [[ "$localPackageName" == "$package" ]] ; then
                     localPackageDir=${localPackage%/package.json}
