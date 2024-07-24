@@ -2,6 +2,10 @@
 set -eo pipefail
 cd "${0%/*}"
 
+source ../env/container-versions
+export NORSK_MEDIA_IMAGE=$NORSK_MEDIA_IMAGE
+export NORSK_STUDIO_IMAGE=$NORSK_STUDIO_IMAGE
+
 declare TURN_DEFAULT
 declare NETWORK_MODE_DEFAULT
 

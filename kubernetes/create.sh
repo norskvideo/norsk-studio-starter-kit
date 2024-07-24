@@ -14,7 +14,7 @@ fi
 
 
 cd "${0%/*}"
-eval $(cat ../envs/components-env ../envs/norsk-media-env ../envs/studio-env  | sed  's/#.*//;s/^/export /')
+eval $(cat ../env/components-env ../env/norsk-media-env ../env/studio-env ../env/container-versions | sed  's/#.*//;s/^/export /')
 
 # The persistent volume mount point needs to be an absolute path
 export MNT_ROOT=$(readlink --canonicalize ../mnt)

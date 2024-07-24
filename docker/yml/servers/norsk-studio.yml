@@ -4,7 +4,7 @@ services:
   #################################################################
   norsk-studio:
     container_name: norsk-studio
-    image: ${STUDIO_DOCKER_IMAGE:-norskvideo/norsk-studio-starter-kit:latest}
+    image: ${NORSK_STUDIO_IMAGE}
     # restart: always
     depends_on:
       norsk-media:
@@ -13,8 +13,8 @@ services:
       - ../../../mnt:/mnt
     command: npx studio-editor
     env_file:
-      - ../../../envs/studio-env # Environment variables used by Norsk Studio
-      - ../../../envs/components-env # Environment variables used by Norsk Studio's components
+      - ../../../env/studio-env # Environment variables used by Norsk Studio
+      - ../../../env/components-env # Environment variables used by Norsk Studio's components
     healthcheck:
       test: ["CMD", "wget", "-O", "/dev/null", "http://127.0.0.1:8000"]
       interval: 10s

@@ -1,0 +1,2 @@
+NORSK_MEDIA_IMAGE=norskvideo/norsk:latest
+NORSK_STUDIO_IMAGE=norskvideo/norsk-studio-starter-kit:latest

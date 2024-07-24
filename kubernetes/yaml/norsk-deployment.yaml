@@ -32,7 +32,7 @@ spec:
         # Norsk Media Server
         #################################################################
         - name: norsk-media
-          image: norskvideo/norsk:v1.0.365-main
+          image: ${NORSK_MEDIA_IMAGE}
           args:
             - --license-file
             - /run/secrets/license.json
@@ -71,7 +71,7 @@ spec:
         # Norsk Studio
         #################################################################
         - name: norsk-studio
-          image: norskvideo/norsk-studio-starter-kit:latest
+          image: ${NORSK_STUDIO_IMAGE}
           # image: localhost:32000/norsk-studio-starter-kit:latest
           args:
             - npx
