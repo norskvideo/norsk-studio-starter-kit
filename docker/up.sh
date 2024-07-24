@@ -18,6 +18,8 @@ usage() {
     echo "Usage: ${0##*/} [options]"
     echo "  Options:"
     echo "    --network-mode [docker|host] : whether the example should run in host or docker network mode.  Defaults to $NETWORK_MODE_DEFAULT on $OSTYPE"
+    echo "    --no-studio : only launch Norsk Media so that you can run Norsk Studio from source"
+    echo "    --turn : launch a local turn server"
 }
 
 main() {
@@ -32,14 +34,6 @@ main() {
         -h | --help)
             usage
             exit 0
-            ;;
-        --turn)
-            localTurn="true"
-            shift 1
-            ;;
-        --noStudio)
-            includeStudio="false"
-            shift 1
             ;;
         --network-mode)
             if [[ "$OSTYPE" == "linux"* ]]; then
@@ -60,6 +54,18 @@ main() {
                 exit 1
             fi
             ;;
+        --no-studio)
+            includeStudio="false"
+            shift 1
+            ;;
+        --turn)
+            localTurn="true"
+            shift 1
+            ;;
+        *)
+            echo "Error: unknown option $1"
+            usage
+            exit 1
         esac
     done
 
