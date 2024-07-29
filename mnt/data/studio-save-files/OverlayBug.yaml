@@ -30,7 +30,6 @@ components:
       displayName: dynamicBug
       defaultBug: trinorsk.png
       defaultPosition: topleft
-      apiPort: 5000
       id: dynamicbug
     subscriptions:
       - source: srt-listener

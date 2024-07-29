@@ -1,5 +1,6 @@
 # The kubectl command varies depending on your Kubernetes environment...
 # Common examples below...
 
-KUBECTL="microk8s kubectl"
-# KUBECTL="kubectl"
+# KUBECTL="microk8s kubectl"
+# KUBECTL="minikube kubectl --"
+KUBECTL="kubectl"
