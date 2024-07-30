@@ -18,6 +18,8 @@ else
 
 fi
 
+LICENSE_FILE="../secrets/license.json"
+
 usage() {
     echo "Usage: ${0##*/} [options]"
     echo "  Options:"
@@ -29,7 +31,15 @@ usage() {
 main() {
     local -r upDown="$1"
     local action
+    local -r licenseFilePath=$(readlink --canonicalize $LICENSE_FILE)
     local networkMode=$NETWORK_MODE_DEFAULT
+
+    # Make sure that a license file is in place
+    if [[ ! -f  $licenseFilePath ]] ; then
+        echo "No license.json file found in $licenseFilePath"
+        echo "  See Readme for instructions on how to obtain one."
+        exit 1
+    fi
 
     local localTurn="false"
     local includeStudio="true"
