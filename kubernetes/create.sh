@@ -17,7 +17,7 @@ cd "${0%/*}"
 eval $(cat ../env/components-env ../env/norsk-media-env ../env/studio-env ../env/container-versions | sed  's/#.*//;s/^/export /')
 
 # The persistent volume mount point needs to be an absolute path
-export MNT_ROOT=$(readlink --canonicalize ../mnt)
+export MNT_ROOT=$(readlink -f ../mnt)
 
 source script-helpers/_kubectl-command.sh
 source script-helpers/_envsubst.sh

@@ -31,7 +31,7 @@ usage() {
 main() {
     local -r upDown="$1"
     local action
-    local -r licenseFilePath=$(readlink --canonicalize $LICENSE_FILE)
+    local -r licenseFilePath=$(readlink -f $LICENSE_FILE)
     local networkMode=$NETWORK_MODE_DEFAULT
 
     # Make sure that a license file is in place
