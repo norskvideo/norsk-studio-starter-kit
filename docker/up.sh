@@ -108,6 +108,11 @@ main() {
     echo "  $cmd"
     $cmd
 
+    echo
+    echo "The Norsk Studio UI is available on http://127.0.0.1:8000"
+    echo "The Norsk Workflow Visualise is available on http://127.0.0.1:6791"
+
+
 }
 
 main "$@"
