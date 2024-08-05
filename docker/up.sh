@@ -41,6 +41,14 @@ main() {
         exit 1
     fi
 
+    # Verify that we can at least get docker version output
+    if ! docker --version; then
+	    echo "Docker is not installed on your system"
+      echo "Please install Docker and start the Docker daemon before retrying"
+      echo "You can find the installation instructions at: https://docs.docker.com/get-docker/"
+	    exit 1
+    fi
+
     local localTurn="false"
     local includeStudio="true"
     while [[ $# -gt 0 ]]; do
@@ -111,8 +119,6 @@ main() {
     echo
     echo "The Norsk Studio UI is available on http://127.0.0.1:8000"
     echo "The Norsk Workflow Visualise is available on http://127.0.0.1:6791"
-
-
 }
 
 main "$@"
