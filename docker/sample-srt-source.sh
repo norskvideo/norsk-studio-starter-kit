@@ -16,15 +16,13 @@ function downloadMediaAssets() {
 
     for i in $MEDIA_ASSETS; do
         if [[ ! -f $SOURCES_DIR/$i ]]; then
-            wget -q -O "$SOURCES_DIR/$i" "https://s3.eu-west-1.amazonaws.com/norsk.video/media-examples/data/$i"
+            echo "Downloading sample file $i"
+            wget -O "$SOURCES_DIR/$i" "https://s3.eu-west-1.amazonaws.com/norsk.video/media-examples/data/$i"
         fi
     done
 }
 
-
 main() {
-    downloadMediaAssets
-
     if [[ $# -ne 2 ]] ; then
         usage
         exit 1
@@ -66,6 +64,8 @@ main() {
             exit 0
         fi
     done
+
+    downloadMediaAssets
     name=$name source=$source docker compose -f yml/sample-sources/srt-camera.yml up -d
 }
 
