@@ -40,13 +40,13 @@ main() {
         echo "  See Readme for instructions on how to obtain one."
         exit 1
     fi
-
+    
     # Verify that we can at least get docker version output
     if ! docker --version; then
-	    echo "Docker is not installed on your system"
-      echo "  Please install Docker and start the Docker daemon before retrying"
-      echo "  You can find the installation instructions at: https://docs.docker.com/get-docker/"
-	    exit 1
+      echo "Docker is not installed on your system"
+      echo "Please install Docker and start the Docker daemon before proceeding"
+      echo "You can find the installation instructions at: https://docs.docker.com/get-docker/"
+      exit 1
     fi
 
     local localTurn="false"
