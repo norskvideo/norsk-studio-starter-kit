@@ -8,7 +8,7 @@ The purpose of this repo is to get you up and running with Norsk Studio as quick
 
 We created this gif to demonstrate how the entire flow should look like:
 
-image::assets/demo.gif[alt="Demo GIF"]
+image::assets/demo.gif[Demo GIF, link=assets/demo.gif]
 
 === Getting a Development License
 
