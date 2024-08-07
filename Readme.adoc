@@ -6,6 +6,10 @@ The purpose of this repo is to get you up and running with Norsk Studio as quick
 * Clone this repo and copy in your license file
 * Run the launch script!
 
+We created this gif to demonstrate how the entire flow should look like:
+
+image::assets/demo.gif[alt="Demo GIF"]
+
 === Getting a Development License
 
 Using Norsk Media requires a license file, but getting one is really easy.  Just go to XXX, fill in the form and a few seconds later you'll have a license in your inbox.
