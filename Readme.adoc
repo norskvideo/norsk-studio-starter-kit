@@ -6,10 +6,6 @@ The purpose of this repo is to get you up and running with Norsk Studio as quick
 * Clone this repo and copy in your license file
 * Run the launch script!
 
-We created this gif to demonstrate how the entire flow should look like:
-
-image::assets/demo.gif[Demo GIF, link=assets/demo.gif]
-
 === Getting a Development License
 
 Using Norsk Media requires a license file, but getting one is really easy.  Just go to XXX, fill in the form and a few seconds later you'll have a license in your inbox.
@@ -31,43 +27,55 @@ cp ~/Downloads/mySuperSecretLicense.json secrets/license.json
 
 === Run the Launch Script (Docker Compose)
 
-Launching Norsk Studio with Docker compose could not be easier.  Just run:
+Launching Norsk Studio with Docker compose could not be easier. Just make sure you have the Docker daemon started:
+
+[source,bash]
+----
+sudo systemctl start docker
+----
+
+Then run:
 
 [source,bash]
 ----
 ./docker/up.sh
 ----
 
-to get going and when you are done,
+This script launches a default instance of Norsk Studio on port 8000 (http://127.0.0.1:8000) with the built-in components and a Norsk media visualizer on port 6791 (http://127.0.0.1:6791). 
+
+If you point your browser to http://127.0.0.1:8000, you should see the Norsk Studio page. There’s an empty workspace in the middle when we just load it, and to the left we have a bunch of nodes that we’ve pre-built. Now, click on the dropdown titled Blank Document on the topright corner and select one of our pre-built workflows - selecting  01_SRT_Ladder.yaml will have the workspace looking like this:
+
+image::assets/SRT-Ladder.png[SRT Ladder]
+
+=== Connect to sources
+
+We have an SRT ladder but it doesn't do anything interesting, yet; to make it more interesting, we can send a media source to the SRT listener and watch this media played back. The script below runs an FFmpeg container using Docker to continously stream a video over the SRT protocol.
+
+[source,bash]
+----
+.docker/sample-srt-source.sh camera1 start
+----
+
+Now, when we go back to the studio page and press the play icon, things should see dotted lines appear with the flow moving from the listener to the CMAF output:
+
+image::assets/connected-sources.png[SRT listener connected to media source]
+
+You can click on the autoCmaf node to watch the playback of the workflow we just created. And that's it - you now have a workflow that listens for SRT input, encodes the input and provides CMAF output that can be played back from a web player. Congratulations!
+
+
+We created this demo to show how the entire flow should look like:
+
+image::assets/demo.gif[Demo GIF, link=assets/demo.gif]
+
+And when you are done, you can run
 
 [source,bash]
 ----
 ./docker/down.sh
 ----
-shuts everything down for you again.
+to shut everything down for you again. 
 
 Not running locally?  You might want to run
-
-== Congratulations!
-
-That's it - you should be up and running!
-
-It may take a while for containers to download, but once they have you will be able to point a browser at:
-
-[%header,cols="1,1"]
-|===
-| What
-| URL
-
-| Norsk Studio UI
-| http://127.0.0.1:8000
-
-| Norsk Media visualiser
-| http://127.0.0.1:6791
-|===
-
-and start running amazing live media workflows.
-
 
 === Whats in the Starter Kit
 
