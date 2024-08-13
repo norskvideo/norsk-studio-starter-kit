@@ -27,14 +27,7 @@ cp ~/Downloads/mySuperSecretLicense.json secrets/license.json
 
 === Run the Launch Script (Docker Compose)
 
-Launching Norsk Studio with Docker compose could not be easier. Just make sure you have the Docker daemon started:
-
-[source,bash]
-----
-sudo systemctl start docker
-----
-
-Then run:
+Launching Norsk Studio with Docker compose could not be easier. Just make sure you have the Docker daemon started and run:
 
 [source,bash]
 ----
@@ -47,13 +40,13 @@ If you point your browser to http://127.0.0.1:8000, you should see the Norsk Stu
 
 image::assets/SRT-Ladder.png[SRT Ladder]
 
-=== Connect to sources
+=== Starting a Sample Sources
 
-We have an SRT ladder but it doesn't do anything interesting, yet; to make it more interesting, we can send a media source to the SRT listener and watch this media played back. The script below runs an FFmpeg container using Docker to continously stream a video over the SRT protocol.
+We have an SRT ladder but it doesn't do anything interesting, yet.  Feel free to send it your own stream (; to make it more interesting, we can send a media source to the SRT listener and watch this media played back. The script below runs an FFmpeg container using Docker to continously stream a video over the SRT protocol.
 
 [source,bash]
 ----
-.docker/sample-srt-source.sh camera1 start
+./docker/sample-srt-source.sh camera1 start
 ----
 
 Now, when we go back to the studio page and press the play icon, things should see dotted lines appear with the flow moving from the listener to the CMAF output:
@@ -73,9 +66,18 @@ And when you are done, you can run
 ----
 ./docker/down.sh
 ----
-to shut everything down for you again. 
+to shut everything down for you again. (You may want to run `./docker/sample-srt-source.sh camera1 stop` as well if you used the sample source... 
 
-Not running locally?  You might want to run
+=== Running on a Remote Server
+
+The above assumes you are running Norsk Studio on your local server (so addresses are 127.0.0.1).  Running remotely is no harder - you just have to tell Norsk Studio what URLs it should publish.
+
+This is done by setting the `PUBLIC_URL_PREFIX` environment variable.  So for example if you are running Norsk Studio on a server with DNS example.norskvideo.com you would start it with
+
+[source,bash]
+----
+PUBLIC_URL_PREFIX=http://example.norskvideo.com:8080 ./docker/up.sh
+----
 
 === Whats in the Starter Kit
 
