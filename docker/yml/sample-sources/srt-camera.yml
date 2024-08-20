@@ -2,11 +2,11 @@ services:
   #################################################################
   # Norsk Media Server
   #################################################################
-  camera1-srt:
+  sample-srt:
     container_name: sample-srt-${name}
     image: datarhei/ffmpeg
-    network_mode: host
     restart: always
+    network_mode: host
     volumes:
       - ../../../sources:/sources:ro
     entrypoint: ""

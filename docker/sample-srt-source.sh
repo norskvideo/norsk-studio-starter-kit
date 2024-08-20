@@ -10,16 +10,15 @@ usage() {
     echo "  Start a sample SRT source that sends a stream to camera 1 or camera 2 on port 5001"
 }
 
-function downloadMediaAssets() {
+function downloadMediaAsset() {
     mkdir -p $SOURCES_DIR
-    MEDIA_ASSETS="Weaving.ts InkDrop.ts TraditionalMusic.mp4"
-
-    for i in $MEDIA_ASSETS; do
-        if [[ ! -f $SOURCES_DIR/$i ]]; then
-            echo "Downloading sample file $i"
-            wget -O "$SOURCES_DIR/$i" "https://s3.eu-west-1.amazonaws.com/norsk.video/media-examples/data/$i"
-        fi
-    done
+    local -r fileName=$1
+    local -r target="$SOURCES_DIR/$fileName"
+    if [[ ! -f $target ]]; then
+        echo "Downloading sample file $target"
+        wget -O "$target.download" "https://s3.eu-west-1.amazonaws.com/norsk.video/media-examples/data/$fileName"
+        mv "$target.download" "$target"
+    fi
 }
 
 main() {
@@ -51,22 +50,22 @@ main() {
             exit 1
     esac
     local -r action=$2
-
     local name=$1
     for i in $(docker ps --all --format '{{.Names}}' | grep -e ^sample-srt-$name\$); do
         echo Stopping $i
         docker rm -f $i
-        # If we are about to start the source again, back off for a couple of seconds first
+        # If we are about to start the source again, back off for a few seconds first
         if [[ $action == "start" ]] ; then
             sleep 5
-        else
-            # We can just exit - we've stopped the source
-            exit 0
         fi
     done
 
-    downloadMediaAssets
-    name=$name source=$source docker compose -f yml/sample-sources/srt-camera.yml up -d
+    if [[ $action != "start" ]] ; then
+        exit 0
+    fi
+
+    downloadMediaAsset "$source"
+    name=$name source=$source docker compose -p $name -f "yml/sample-sources/srt-camera.yml" up -d
 }
 
 main "$@"
