@@ -40,54 +40,54 @@ main() {
         echo "  See Readme for instructions on how to obtain one."
         exit 1
     fi
-    
+
     # Verify that we can at least get docker version output
     if ! docker --version; then
-      echo "Docker is not installed on your system"
-      echo "Please install Docker and start the Docker daemon before proceeding"
-      echo "You can find the installation instructions at: https://docs.docker.com/get-docker/"
-      exit 1
+        echo "Docker is not installed on your system"
+        echo "Please install Docker and start the Docker daemon before proceeding"
+        echo "You can find the installation instructions at: https://docs.docker.com/get-docker/"
+        exit 1
     fi
 
     local localTurn="false"
     local includeStudio="true"
     while [[ $# -gt 0 ]]; do
         case $1 in
-        -h | --help)
-            usage
-            exit 0
+            -h | --help)
+                usage
+                exit 0
             ;;
-        --network-mode)
-            if [[ "$OSTYPE" == "linux"* ]]; then
-                case "$2" in
-                docker | host)
-                    networkMode=$2
-                    shift 2
-                    ;;
-                *)
-                    echo "Unknown network-mode $2"
+            --network-mode)
+                if [[ "$OSTYPE" == "linux"* ]]; then
+                    case "$2" in
+                        docker | host)
+                            networkMode=$2
+                            shift 2
+                        ;;
+                        *)
+                            echo "Unknown network-mode $2"
+                            usage
+                            exit 1
+                        ;;
+                    esac
+                else
+                    echo "network-mode is unsupported on $OSTYPE"
                     usage
                     exit 1
-                    ;;
-                esac
-            else
-                echo "network-mode is unsupported on $OSTYPE"
+                fi
+            ;;
+            --no-studio)
+                includeStudio="false"
+                shift 1
+            ;;
+            --turn)
+                localTurn="true"
+                shift 1
+            ;;
+            *)
+                echo "Error: unknown option $1"
                 usage
                 exit 1
-            fi
-            ;;
-        --no-studio)
-            includeStudio="false"
-            shift 1
-            ;;
-        --turn)
-            localTurn="true"
-            shift 1
-            ;;
-        *)
-            echo "Error: unknown option $1"
-            usage
-            exit 1
         esac
     done
 
@@ -117,8 +117,10 @@ main() {
     $cmd
 
     echo
-    echo "The Norsk Studio UI is available on http://127.0.0.1:8000"
-    echo "The Norsk Workflow Visualise is available on http://127.0.0.1:6791"
+    if $includeStudio ; then
+        echo "The Norsk Studio UI is available on http://127.0.0.1:8000"
+    fi
+    echo "The Norsk Workflow Visualiser is available on http://127.0.0.1:6791"
 }
 
 main "$@"
