@@ -39,23 +39,18 @@ spec:
           ports:
             - name: "rtmp"
               containerPort: 1935
-              hostPort: 1935
               protocol: TCP
             - name: "srt-1"
               containerPort: 5001
-              hostPort: 5001
               protocol: UDP
             - name: "srt-2"
               containerPort: 5002
-              hostPort: 5002
               protocol: UDP
             - name: "norsk-media-ui"
               containerPort: 6791
-              hostPort: 6791
               protocol: TCP
             - name: "media-serving"
               containerPort: 8080
-              hostPort: 8080
               protocol: TCP
           volumeMounts:
             - name: norsk-secrets
@@ -95,7 +90,6 @@ spec:
             - name: "studio-ui"
               containerPort: 8000
               protocol: TCP
-              hostPort: 8000
           volumeMounts:
             - mountPath: "/mnt"
               name: norsk-pv-storage
