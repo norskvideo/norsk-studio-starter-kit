@@ -7,7 +7,7 @@ server:
   logs: "logs"
   library:
     - "@norskvideo/norsk-studio-built-ins"
-    - "@norskvideo/norsk-studio-vision-director"
+    - "@norskvideo/norsk-studio-source-switcher"
     - "norsk-studio-starter-kit"
   #  If you want to use AWS things, you need to add the following library
   #  - '@norskvideo/norsk-studio-aws'
