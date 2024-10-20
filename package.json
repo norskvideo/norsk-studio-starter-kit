@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "clean": "rm -rf lib",
+    "shiny-clean": "npm run clean && rm -rf node_modules",
     "build": "npx studio-wrap-infos src/ && npx npm-run-all build:* && rm -rf build",
     "build-docker": "npm run build && ./scripts/build-docker.sh",
     "_build:eslint": "npx eslint src",
@@ -24,11 +25,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@norskvideo/norsk-sdk": "^1.0.365",
-    "@norskvideo/norsk-studio": "^1.18.2",
-    "@norskvideo/norsk-studio-aws": "^1.3.3",
-    "@norskvideo/norsk-studio-built-ins": "^1.11.3",
-    "@norskvideo/norsk-studio-vision-director": "^1.8.3",
+    "@norskvideo/norsk-api": "file:../norsk/client/workspaces/api",
+    "@norskvideo/norsk-sdk": "file:../norsk/client/workspaces/sdk",
+    "@norskvideo/norsk-studio": "file:../norsk-studio-core",
+    "@norskvideo/norsk-studio-built-ins": "file:../norsk-studio/workspaces/built-ins",
+    "@norskvideo/norsk-studio-source-switcher": "file:../norsk-studio/workspaces/source-switcher",
     "norsk-studio-starter-kit": "file:."
   },
   "devDependencies": {
