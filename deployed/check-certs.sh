@@ -18,7 +18,7 @@ ln -s $CERTS/fullchain.pem certs/nginx.ec.crt
 ln -s $CERTS/privkey.pem certs/nginx.ec.key
 
 if [[ ! -f $CERTS/privkey.pem ]]; then
-  (set -x; ../deployed/certbot-wait-for-dns.sh "$DEPLOY_DOMAIN_NAME" "$DEPLOY_PUBLIC_IP" "$DEPLOY_CERTBOT_EMAIL")
+  (set -x; ./certbot-wait-for-dns.sh "$DEPLOY_DOMAIN_NAME" "$DEPLOY_PUBLIC_IP" "$DEPLOY_CERTBOT_EMAIL")
 else
   (set -x; certbot -q renew --no-random-sleep-on-renew)
 fi
