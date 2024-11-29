@@ -8,8 +8,9 @@ touch $HTPASSWD
 # If the password file was not already customized
 if [[ "$(grep -cvEe '^$|^norsk-studio-admin:' $HTPASSWD)" -eq 0 ]]; then
   # grab the password from instance metadata
+  IMAGE=xmartlabs/htpasswd@sha256:fac862e543f80d72386492aa87b0f6f3c1c06a49a845e553ebea91750ce6320c
   bash "../deployed/$DEPLOY_PLATFORM/admin-password.sh" \
-    | docker run --rm -i xmartlabs/htpasswd -i norsk-studio-admin > $HTPASSWD
+    | docker run --rm -i $IMAGE -i norsk-studio-admin > $HTPASSWD
 fi
 
 ./oauth2/secrets/oauth2-proxy.cfg.sh # will refresh cookie secret

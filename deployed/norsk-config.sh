@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-export DEPLOY_PLATFORM="$("$(dirname "$0")/detect.sh")"
-source "$(dirname "$0")/$DEPLOY_PLATFORM/$(basename "$0")"
+export DEPLOY_PLATFORM="$("$(dirname "$BASH_SOURCE")/detect.sh")"
+source "$(dirname "$BASH_SOURCE")/$DEPLOY_PLATFORM/$(basename "$0")"
