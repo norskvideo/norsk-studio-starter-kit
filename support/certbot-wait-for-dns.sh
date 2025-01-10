@@ -93,7 +93,7 @@ function tee_cert() {
 }
 function do_cert() {
   date
-  if [[ -z "$EMAIL" ]]; then
+  if [[ -z "$EMAIL" || "$1" == "--dry-run" ]]; then
     echo sudo certbot certonly --standalone --agree-tos --register-unsafely-without-email --non-interactive -d "$DOMAIN" "$@"
     sudo certbot certonly --standalone --agree-tos --register-unsafely-without-email --non-interactive -d "$DOMAIN" "$@"
   else
