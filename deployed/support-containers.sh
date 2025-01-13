@@ -8,4 +8,4 @@ if [[ "${1:-}" = "up" || "${1:-}" = "start" ]]; then
 fi
 
 export AUTH_METHOD=oauth2
-docker compose -f nginx.yaml -f oauth2.yaml "$@"
+docker compose -f nginx.yaml -f oauth2.yaml -f logs.yaml "$@"

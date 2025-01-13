@@ -16,9 +16,9 @@ GLOBAL_ICE_SERVERS: # if you are running with a local turn server (replace "MyTu
 # Environment variables that impact ALL instances of a component.
 # in a workflow
 
-# If not specified, this will be 'bugs', relative to the
+# If not specified, this will be 'grphics', relative to the
 # norsk working directory
-# DYNAMICBUG_DIRECTORY: bugs
+# ONSCREENGRAPHIC_DIRECTORY: graphics
 
 ###############################################################
 # Component instance level

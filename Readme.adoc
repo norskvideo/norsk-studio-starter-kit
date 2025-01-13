@@ -34,7 +34,7 @@ Launching Norsk Studio with Docker compose could not be easier. Just make sure y
 ./docker/up.sh
 ----
 
-This script launches a default instance of Norsk Studio on port 8000 (http://127.0.0.1:8000) with the built-in components and a Norsk media visualizer on port 6791 (http://127.0.0.1:6791). 
+This script launches a default instance of Norsk Studio on port 8000 (http://127.0.0.1:8000) with the built-in components and a Norsk media visualizer on port 6791 (http://127.0.0.1:6791).
 
 If you point your browser to http://127.0.0.1:8000, you should see the Norsk Studio page. There’s an empty workspace in the middle when we just load it, and to the left we have a bunch of nodes that we’ve pre-built. Now, click on the dropdown titled Blank Document on the topright corner and select one of our pre-built workflows - selecting  01_SRT_Ladder.yaml will have the workspace looking like this:
 
@@ -66,7 +66,7 @@ And when you are done, you can run
 ----
 ./docker/down.sh
 ----
-to shut everything down for you again. (You may want to run `./docker/sample-srt-source.sh camera1 stop` as well if you used the sample source... 
+to shut everything down for you again. (You may want to run `./docker/sample-srt-source.sh camera1 stop` as well if you used the sample source...
 
 === Running on a Remote Server
 
@@ -85,7 +85,7 @@ PUBLIC_URL_PREFIX=http://example.norskvideo.com:8080 ./docker/up.sh
 ----
 mnt
 ├── data
-│  ├── bugs
+│  ├── graphics
 │  │  └── trinorsk.png
 │  ├── overrides
 │  │  └── example-overrides.yaml

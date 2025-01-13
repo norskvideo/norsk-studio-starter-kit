@@ -1,6 +1,6 @@
 services:
-  nginx:
-    image: nginx:latest
+  nginx-proxy:
+    image: nginx:${NGINX_VERSION:-latest}
     container_name: nginx-proxy
     extra_hosts:
       - "host.docker.internal:host-gateway"

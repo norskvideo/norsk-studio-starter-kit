@@ -9,7 +9,7 @@ Example folder structure below:
 ----
 mnt
 └── data
-   ├── bugs
+   ├── graphics
    │  └── trinorsk.png
    ├── studio-save-files
    │  ├── OverlayBug.yaml

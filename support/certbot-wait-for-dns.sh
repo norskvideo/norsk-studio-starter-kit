@@ -10,7 +10,7 @@ DOMAIN="$1"
 IP="$2"
 EMAIL="$3"
 
-LOGS=logs/certbot-dns
+LOGS=../logs/certbot-dns
 rm -rf $LOGS
 mkdir -p $LOGS
 

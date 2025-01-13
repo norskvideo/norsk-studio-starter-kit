@@ -8,7 +8,7 @@ STUDIO_WORKING_DIRECTORY=${STUDIO_WORKING_DIRECTORY:-/mnt/data/}
 #
 # mnt
 # └── data
-#    ├── bugs
+#    ├── graphics
 #    │  └── trinorsk.png
 #    ├── studio-save-files
 #    │  ├── OverlayBug.yaml
