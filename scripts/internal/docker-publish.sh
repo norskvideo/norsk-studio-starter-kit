@@ -5,11 +5,11 @@ cd "${0%/*}"
 cd ../..
 
 acct=norskvideo
-name=norsk-studio-starter-kit
+localname=norsk-studio-starter-kit
 
 function main {
     local -r arch=$(uname -m)
-    local -r label=$(npm view file:. version)
+    local -r label=$1
     local tag
     case $arch in
     aarch64)
@@ -25,7 +25,7 @@ function main {
         ;;
     esac
     docker login -u $acct
-    docker tag $name:latest $acct/$name:$tag
+    docker tag $localname:latest $acct/$name:$tag
     docker push $acct/$name:$tag
     docker logout
 }
