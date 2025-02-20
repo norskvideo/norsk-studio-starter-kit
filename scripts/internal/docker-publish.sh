@@ -5,7 +5,7 @@ cd "${0%/*}"
 cd ../..
 
 acct=norskvideo
-localname=norsk-studio-starter-kit
+localName=norsk-studio-starter-kit:latest
 
 function main {
     local -r arch=$(uname -m)
@@ -24,9 +24,10 @@ function main {
         exit 1
         ;;
     esac
+    local remoteName=$acct/norsk-studio:$tag
     docker login -u $acct
-    docker tag $localname:latest $acct/$localname:$tag
-    docker push $acct/$name:$tag
+    docker tag $localName $remoteName
+    docker push $remoteName
     docker logout
 }
 
