@@ -5,10 +5,10 @@ cd "${0%/*}"
 cd ../..
 
 acct=norskvideo
-name=norsk-studio-starter-kit
+name=norsk-studio
 
 function main {
-    local -r label=$(npm view file:. version)
+    local -r label=$1
     local -r containerName=$acct/$name
 
     docker manifest rm "$containerName:$label" || true
@@ -26,9 +26,9 @@ function main {
     docker login -u norskvideo
 
     docker manifest push "$containerName:$label"
-    docker manifest push $containerName:latest
+    echo  docker manifest push $containerName:latest
 
-    docker logout
+   #  docker logout
 }
 
 main "$@"

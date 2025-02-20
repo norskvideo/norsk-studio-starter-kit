@@ -25,7 +25,7 @@ function main {
         ;;
     esac
     docker login -u $acct
-    docker tag $localname:latest $acct/$name:$tag
+    docker tag $localname:latest $acct/$localname:$tag
     docker push $acct/$name:$tag
     docker logout
 }
