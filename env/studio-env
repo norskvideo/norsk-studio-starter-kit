@@ -25,7 +25,8 @@ STUDIO_DOCUMENT=${STUDIO_DOCUMENT:-}
 # If non-empty, Studio will load from its working directory and run the
 # document at startup.  It also disables stop / start on the workflow
 
-STUDIO_DOCUMENT_OVERRIDES=${STUDIO_DOCUMENT_OVERRIDES:-/mnt/data/overrides/example-overrides.yaml}
+STUDIO_DOCUMENT_OVERRIDES=${STUDIO_DOCUMENT_OVERRIDES:-}
+# Example: /data/overrides/example-overrides.yaml
 # If non-empty, Studio will use this file to override configuration using
 # in the same manner as the usage of environment variables
 
