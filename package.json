@@ -26,7 +26,7 @@
   "license": "ISC",
   "dependencies": {
     "@norskvideo/norsk-sdk": "^1.0.400",
-    "@norskvideo/norsk-studio": "file:../norsk-studio-core",
+    "@norskvideo/norsk-studio": "file:../norsk-studio/workspaces/core",
     "@norskvideo/norsk-studio-built-ins": "file:../norsk-studio/workspaces/built-ins",
     "@norskvideo/norsk-studio-source-switcher": "file:../norsk-studio/workspaces/source-switcher",
     "norsk-studio-starter-kit": "file:."
