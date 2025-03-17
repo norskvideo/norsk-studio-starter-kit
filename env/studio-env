@@ -32,7 +32,9 @@ STUDIO_DOCUMENT_OVERRIDES=${STUDIO_DOCUMENT_OVERRIDES:-}
 
 # Media URLs that Studio publishes will start with the below
 PUBLIC_URL_PREFIX=${PUBLIC_URL_PREFIX:-http://127.0.0.1:8080}
+STUDIO_URL_PREFIX=${PUBLIC_URL_PREFIX:-}
+STUDIO_DOCS_URL=${STUDIO_DOCS_URL:-}
 
 # Logging
-LOG_LEVEL=silly # error warning info debug silly
+LOG_LEVEL=info # error warning info debug silly
 NODE_DEBUG=norsk # Output extra trace (e.g. gRPC messages)
