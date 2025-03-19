@@ -4,6 +4,7 @@ After=network.target
 After=norsk-setup.service
 
 [Service]
+User=root
 WorkingDirectory=/var/norsk-studio/norsk-studio-starter-kit
 ExecStart=/var/norsk-studio/norsk-studio-starter-kit/deployed/support-containers.sh up --abort-on-container-exit
 ExecStop=/var/norsk-studio/norsk-studio-starter-kit/deployed/support-containers.sh down

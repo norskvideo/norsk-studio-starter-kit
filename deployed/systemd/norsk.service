@@ -3,7 +3,7 @@ Description=Norsk Studio and Norsk Engine
 After=network.target
 
 [Service]
-User=id3as
+User=norsk
 WorkingDirectory=/var/norsk-studio/norsk-studio-starter-kit
 ExecStart=/var/norsk-studio/norsk-studio-starter-kit/deployed/norsk-containers.sh up --abort-on-container-exit
 ExecStop=/var/norsk-studio/norsk-studio-starter-kit/deployed/norsk-containers.sh down
