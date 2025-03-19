@@ -7,7 +7,7 @@ mkdir -p ../logs/norsk-studio
 mkdir -p ../logs/nginx-proxy
 mkdir -p ../logs/oauth2-proxy
 mkdir -p ../logs/certbot-dns
-chmod 777 ../logs/*
+chmod 664 ../logs/*
 
 if [[ ! -f oauth2/secrets/.htpasswd || ! -f oauth2/secrets/oauth2-proxy.cfg ]]; then
   bash ../deployed/setup.sh
