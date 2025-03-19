@@ -12,8 +12,17 @@ if [[ "${1:-}" = "up" || "${1:-}" = "start" ]]; then
 fi
 
 networkDir="host-networking"
-docker compose \
-  -f yml/servers/norsk-media.yml -f yml/$networkDir/norsk-media.yml \
-  -f yml/servers/norsk-studio.yml -f yml/$networkDir/norsk-studio.yml \
-  -f yml/volumes/norsk-logs.yml \
-  "$@"
+
+declare -a composeFiles
+composeFiles=(
+  -f yml/servers/norsk-media.yml -f yml/$networkDir/norsk-media.yml
+  -f yml/servers/norsk-studio.yml -f yml/$networkDir/norsk-studio.yml
+  -f yml/volumes/norsk-logs.yml
+)
+if [[ -n "${DEPLOY_HARDWARE:-}" ]]; then
+  composeFiles+=(
+    -f "$DEPLOY_HARDWARE"
+  )
+fi
+
+docker compose "${composeFiles[@]}" "$@"
