@@ -3,6 +3,8 @@ Description=Norsk cloud auto-configuration
 After=network.target
 
 [Service]
+User=id3as
+# oneshot runs once on startup and reboot
 Type=oneshot
 WorkingDirectory=/var/norsk-studio/norsk-studio-starter-kit
 ExecStart=/var/norsk-studio/norsk-studio-starter-kit/deployed/setup.sh
